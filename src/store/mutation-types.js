@@ -1,0 +1,5 @@
+export const SET_INFO = 'SET_INFO'
+export const SET_MENU = 'SET_MENU'
+export const SET_LOGIN_STATE = 'SET_LOGIN_STATE'
+export const REFRESH_LOGIN_STATE = 'REFRESH_LOGIN_STATE'
+export const USERLOGOUT = 'USERLOGOUT'

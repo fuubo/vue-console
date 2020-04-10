@@ -1,0 +1,46 @@
+/* myself
+--------------------------*/
+// color
+$text-main: #fff;
+$text-decoration: #980F29 ;
+// background color
+$background-color:  #221f20;
+$background-menu: rgba(0, 0, 0, 0.6);
+$background-card-header: #0c0b08;
+$background-card: #131414;
+$background-table-header: #131414;
+$background-table: #1d1f1f;
+// font
+$--font-size-extralarge: 20px !default;
+$--font-size-medium: 16px !default;
+$--font-size-extrasmall: 12px !default;
+
+
+/* 改变主题色变量 */
+$--color-primary: #980F29 ;
+
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+/* Card
+--------------------------*/
+$--card-border-radius: 0px !default;
+$--card-padding: 10px !default;
+
+/* Menu
+--------------------------*/
+$--menu-item-hover-fill: none !default;
+
+/* Table
+-------------------------- */
+// $--table-border-color: $--border-color-lighter !default;
+// $--table-border: 1px solid $--table-border-color !default;
+$--table-text-color: $text-main !default;
+// $--table-header-color: $--color-text-secondary !default;
+$--table-row-hover-background: transparent !default;
+// $--table-current-row-background: $--color-primary-light-9 !default;
+$--table-header-background: $background-table-header !default;
+// $--table-footer-background: $--color-text-placeholder !default;
+// $--table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12) !default;
+
+@import "~element-ui/packages/theme-chalk/src/index";
