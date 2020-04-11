@@ -7,6 +7,10 @@ import layout from '@/pages/layout'
 import home from '@/pages/home'
 import login from '@/pages/login'
 import notFound from '@/pages/404'
+const permissionTree = () => import('@/pages/system/permissionTree');
+const userList = () => import('@/pages/system/userList');
+const roleList = () => import('@/pages/system/roleList');
+const departmentList = () => import('@/pages/system/departmentList');
 
 Vue.use(Router)
 
@@ -44,6 +48,26 @@ let router = new Router({
           path: '/',
           name: '首页',
           component: home
+        },
+        {
+          path: '/permissionTree',
+          name: '权限管理',
+          component: permissionTree
+        },
+        {
+          path: '/userList',
+          name: '用户管理',
+          component: userList
+        },
+        {
+          path: '/roleList',
+          name: '角色管理',
+          component: roleList
+        },
+        {
+          path: '/departmentList',
+          name: '部门管理',
+          component: departmentList
         },
       ]
     }
