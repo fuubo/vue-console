@@ -51,8 +51,8 @@
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="center">个人中心</el-dropdown-item>
-          <el-dropdown-item command="logout">登出</el-dropdown-item>
+          <el-dropdown-item command="center" style="width: 100px">个人中心</el-dropdown-item>
+          <el-dropdown-item command="logout" style="width: 100px">登出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
