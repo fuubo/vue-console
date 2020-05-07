@@ -1,4 +1,4 @@
-# bootstrapVue项目
+# ElementUI Vue 项目
 
 ## Project setup
 ```
