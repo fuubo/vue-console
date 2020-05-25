@@ -4,7 +4,8 @@ let OSS = require('ali-oss');
 const login = async (loginData) => {
   let result = await request.post('/login/login', {
     userName: loginData.username,
-    password: loginData.password
+    password: loginData.password,
+    loginType: loginData.loginType
   })
   if (result.code === 0) {
     return result

@@ -18,7 +18,7 @@
           </el-menu-item>
           <template v-for="topMenu in this.menu.menuList">
             <template v-if="topMenu.subMenuList && topMenu.subMenuList.length>0">
-              <el-submenu :index="topMenu.path" :key="topMenu.permissionId">
+              <el-submenu :index="`{topMenu.path | ''}`" :key="topMenu.permissionId">
                 <template slot="title">
                   <i :class="topMenu.icon"></i>
                   <span slot="title">{{topMenu.name}}</span>
@@ -31,7 +31,7 @@
               </el-submenu>
             </template>
             <template v-else>
-              <el-menu-item :key="topMenu.permissionId" :index="topMenu.path">{{topMenu.name}}</el-menu-item>
+              <el-menu-item :key="topMenu.permissionId" :index="`{topMenu.path | ''}`">{{topMenu.name}}</el-menu-item>
             </template>
           </template>
         </el-menu>
