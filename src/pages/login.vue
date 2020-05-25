@@ -49,7 +49,8 @@ export default {
       loading: false,
       data: {
         username: null,
-        password: null
+        password: null,
+        loginType: 1
       },
       rules: {
         username: [
