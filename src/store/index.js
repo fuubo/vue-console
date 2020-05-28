@@ -10,6 +10,10 @@ const state = {
   userInfo: null,
   islogin: null,
   menu: null,
+  systemUserMap: null,
+  districts: null,
+  clubs: null,
+  activityCategories: null,
 }
 
 export default new Vuex.Store({

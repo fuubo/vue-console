@@ -11,6 +11,9 @@ const permissionTree = () => import('@/pages/system/permissionTree');
 const userList = () => import('@/pages/system/userList');
 const roleList = () => import('@/pages/system/roleList');
 const departmentList = () => import('@/pages/system/departmentList');
+const activityList = () => import('@/pages/activity/activityList');
+const addActivity = () => import('@/pages/activity/addActivity');
+const activityInfo = () => import('@/pages/activity/activityInfo');
 
 Vue.use(Router)
 
@@ -69,10 +72,35 @@ let router = new Router({
           name: '部门管理',
           component: departmentList
         },
+        {
+          path: '/activityList',
+          name: '活动列表',
+          component: activityList
+        },
+        {
+          path: '/addActivity',
+          name: '创建活动',
+          component: addActivity
+        },
+        {
+          path: '/activityInfo/:id',
+          name: '活动详情',
+          props: true,
+          component: activityInfo
+        }
       ]
     }
   ]
 })
+
+router.onError((error) => {
+  const pattern = /Loading chunk (\d)+ failed/g;
+  const isChunkLoadFailed = error.message.match(pattern);
+  const targetPath = router.history.pending.fullPath;
+  if (isChunkLoadFailed) {
+    router.replace(targetPath);
+  }
+});
 
 router.beforeEach((to, from, next) => {
   let login = window.localStorage.getItem(LOGINAUTHTOKEN)

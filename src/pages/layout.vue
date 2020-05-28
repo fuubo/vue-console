@@ -18,7 +18,7 @@
           </el-menu-item>
           <template v-for="topMenu in this.menu.menuList">
             <template v-if="topMenu.subMenuList && topMenu.subMenuList.length>0">
-              <el-submenu :index="`{topMenu.path | ''}`" :key="topMenu.permissionId">
+              <el-submenu :index="topMenu.permissionId+''" :key="topMenu.permissionId">
                 <template slot="title">
                   <i :class="topMenu.icon"></i>
                   <span slot="title">{{topMenu.name}}</span>
@@ -31,7 +31,10 @@
               </el-submenu>
             </template>
             <template v-else>
-              <el-menu-item :key="topMenu.permissionId" :index="`{topMenu.path | ''}`">{{topMenu.name}}</el-menu-item>
+              <el-menu-item
+                :key="topMenu.permissionId"
+                :index="topMenu.permissionId+''"
+              >{{topMenu.name}}</el-menu-item>
             </template>
           </template>
         </el-menu>
@@ -52,30 +55,30 @@
     </el-main>
     <el-dialog title="修改密码" :visible.sync="changePasswordVisable" width="35%">
       <div slot="header" class="clearfix">
-            <span>修改密码</span>
-          </div>
-          <el-form
-            :model="passwordForm"
-            status-icon
-            :rules="rules"
-            ref="passwordForm"
-            label-width="100px"
-            class="demo-passwordForm"
-          >
-            <el-form-item label="旧密码" prop="oldPass">
-              <el-input type="password" v-model="passwordForm.oldPass" autocomplete="off"></el-input>
-            </el-form-item>
-            <el-form-item label="新密码" prop="pass">
-              <el-input type="password" v-model="passwordForm.pass" autocomplete="off"></el-input>
-            </el-form-item>
-            <el-form-item label="确认新密码" prop="checkPass">
-              <el-input type="password" v-model="passwordForm.checkPass" autocomplete="off"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="submitForm('passwordForm')">提交</el-button>
-              <el-button @click="resetForm('passwordForm')">重置</el-button>
-            </el-form-item>
-          </el-form>
+        <span>修改密码</span>
+      </div>
+      <el-form
+        :model="passwordForm"
+        status-icon
+        :rules="rules"
+        ref="passwordForm"
+        label-width="100px"
+        class="demo-passwordForm"
+      >
+        <el-form-item label="旧密码" prop="oldPass">
+          <el-input type="password" v-model="passwordForm.oldPass" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="新密码" prop="pass">
+          <el-input type="password" v-model="passwordForm.pass" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="确认新密码" prop="checkPass">
+          <el-input type="password" v-model="passwordForm.checkPass" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('passwordForm')">提交</el-button>
+          <el-button @click="resetForm('passwordForm')">重置</el-button>
+        </el-form-item>
+      </el-form>
     </el-dialog>
   </el-container>
 </template>
@@ -111,19 +114,21 @@ export default {
       isCollapse: false,
       changePasswordVisable: false,
       passwordForm: {
-        oldPass: '',
+        oldPass: "",
         pass: "",
         checkPass: ""
       },
       rules: {
-        oldPass: [{ required: true, message: '请输入旧密码', trigger: "blur" }],
+        oldPass: [{ required: true, message: "请输入旧密码", trigger: "blur" }],
         pass: [{ required: true, validator: validatePass, trigger: "blur" }],
-        checkPass: [{ required: true, validator: validatePass2, trigger: "blur" }]
+        checkPass: [
+          { required: true, validator: validatePass2, trigger: "blur" }
+        ]
       }
     };
   },
   computed: {
-    ...mapState(["islogin", "userInfo", "menu"]),
+    ...mapState(["islogin", "userInfo", "menu"])
   },
   beforeMount() {
     this.permission(this.$router.currentRoute);
@@ -136,6 +141,10 @@ export default {
         try {
           await this.GET_USER_INFO();
           this.GET_MENU();
+          await this.GET_SYSTEM_USER_MAP();
+          await this.GET_DISTRICTS();
+          await this.GET_SYSTEM_CLUBS();
+          await this.GET_ACTIVITY_CATEGORIES();
         } catch (e) {
           this.$throw(e, this);
         }
@@ -150,7 +159,14 @@ export default {
   },
   methods: {
     ...mapMutations(["USERLOGOUT"]),
-    ...mapActions(["GET_USER_INFO", "GET_MENU"]),
+    ...mapActions([
+      "GET_USER_INFO",
+      "GET_MENU",
+      "GET_SYSTEM_USER_MAP",
+      "GET_DISTRICTS",
+      "GET_SYSTEM_CLUBS",
+      "GET_ACTIVITY_CATEGORIES"
+    ]),
     changeIndex(to) {
       this.permission(to);
       this.activeIndex = "/" + this.$router.currentRoute.fullPath.split("/")[1];
@@ -198,12 +214,17 @@ export default {
       this.$refs[formName].validate(async valid => {
         try {
           if (valid) {
-            await setPassword(this.passwordForm.oldPass, this.passwordForm.pass);
-            this.$message.success('密码修改成功！即将跳转登录页面，请重新登录！')
-            this.resetForm('passwordForm')
+            await setPassword(
+              this.passwordForm.oldPass,
+              this.passwordForm.pass
+            );
+            this.$message.success(
+              "密码修改成功！即将跳转登录页面，请重新登录！"
+            );
+            this.resetForm("passwordForm");
             setTimeout(() => {
-              this.$router.replace('/login')
-            }, 3000)
+              this.$router.replace("/login");
+            }, 3000);
           } else {
             console.log("error submit!!");
             return false;
@@ -215,7 +236,7 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-    },
+    }
   }
 };
 </script>

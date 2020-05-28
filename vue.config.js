@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 module.exports = {
   devServer: {
     proxy: {
@@ -11,5 +12,12 @@ module.exports = {
       }
     }
   },
-  publicPath: './'
+  publicPath: './',
+  configureWebpack: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        'window.Quill': 'quill/dist/quill.js',
+      }),
+    ]
+  }
 }
