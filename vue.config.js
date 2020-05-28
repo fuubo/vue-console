@@ -12,7 +12,6 @@ module.exports = {
       }
     }
   },
-  publicPath: './',
   configureWebpack: {
     plugins: [
       new webpack.ProvidePlugin({
