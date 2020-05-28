@@ -40,7 +40,11 @@
             <el-link :href="`/activityInfo/${scope.row.id}`">{{scope.row.id}}</el-link>
           </template>
         </el-table-column>
-        <el-table-column prop="title" label="活动标题" min-width="10%"></el-table-column>
+        <el-table-column prop="title" label="活动标题" min-width="10%">
+          <template slot-scope="scope">
+            <el-link :href="`/activityInfo/${scope.row.id}`">{{scope.row.title}}</el-link>
+          </template>
+        </el-table-column>
         <el-table-column label="封面" min-width="10%">
           <template slot-scope="scope">
             <el-image
@@ -52,7 +56,9 @@
             </el-image>
           </template>
         </el-table-column>
-        <el-table-column prop="clubName" label="俱乐部" min-width="10%"></el-table-column>
+        <el-table-column prop="clubId" label="俱乐部" min-width="10%">
+          <template slot-scope="scope">{{clubs && clubs[scope.row.clubId]}}</template>
+        </el-table-column>
         <el-table-column label="时间" min-width="20%">
           <template slot-scope="scope">
             <p>开始日期：{{scope.row.startDate | dateFormat}}</p>
@@ -62,7 +68,7 @@
         <el-table-column prop="province" label="省份" min-width="4%"></el-table-column>
         <el-table-column prop="city" label="城市" min-width="4%"></el-table-column>
         <el-table-column prop="location" label="具体位置" min-width="18%"></el-table-column>
-        <el-table-column prop="category" label="类别" min-width="5%">
+        <el-table-column prop="categoryId" label="类别" min-width="5%">
           <template
             slot-scope="scope"
           >{{activityCategories && activityCategories[scope.row.categoryId]}}</template>
@@ -76,10 +82,10 @@
         <el-table-column label="操作" min-width="15%">
           <template slot-scope="scope">
             <p>
-              <el-button type="text" @click="editById(`${scope.row.id}`)">编辑</el-button>
+              <el-button type="text" @click="deleteById(`${scope.row.id}`)">删除</el-button>
             </p>
             <p>
-              <el-button type="text" @click="deleteById(`${scope.row.id}`)">删除</el-button>
+              <el-link :href="`/activityInfo/${scope.row.id}`">编辑</el-link>
             </p>
           </template>
         </el-table-column>
@@ -99,13 +105,13 @@
 </template>
 
 <script>
-import { getActivityList } from "@/api";
+import { getActivityList, deleteActivity } from "@/api";
 import { mapState, mapActions } from "vuex";
 export default {
   name: "userList",
   props: ["filter"],
   computed: {
-    ...mapState(["systemUserMap", "activityCategories"])
+    ...mapState(["systemUserMap", "activityCategories", "clubs"])
   },
   data() {
     return {
@@ -141,6 +147,20 @@ export default {
       } finally {
         this.loading = false;
       }
+    },
+    async deleteById(id) {
+      await this.$confirm("确定删除?", "确认", {
+        distinguishCancelAndClose: true,
+        confirmButtonText: "确定",
+        cancelButtonText: "取消"
+      });
+      await deleteActivity({ id: id });
+      this.$message({
+        showClose: true,
+        message: "删除成功",
+        type: "success"
+      });
+      this.$emit("success");
     },
     async search(formName) {
       this.users = null;

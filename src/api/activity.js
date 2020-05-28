@@ -49,9 +49,20 @@ const getActivityInfo = async (id) => {
     }
 }
 
+const deleteActivity = async (params) => {
+    let result = await request.post('/activity/deleteActivity', params);
+    if (result.code != 0) {
+        throw {
+            code: 100,
+            message: result.message
+        }
+    }
+}
+
 export {
     getActivityList,
     addActivity,
     getActivityCategoryMap,
     getActivityInfo,
+    deleteActivity,
 }
