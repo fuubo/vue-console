@@ -43,6 +43,7 @@
         <el-table-column prop="title" label="活动标题" min-width="10%">
           <template slot-scope="scope">
             <el-link :href="`/activityInfo/${scope.row.id}`">{{scope.row.title}}</el-link>
+            <el-tag v-if="scope.row.recommendFlag">首页推荐</el-tag>
           </template>
         </el-table-column>
         <el-table-column label="封面" min-width="10%">
@@ -59,13 +60,13 @@
         <el-table-column prop="clubId" label="俱乐部" min-width="10%">
           <template slot-scope="scope">{{clubs && clubs[scope.row.clubId]}}</template>
         </el-table-column>
-        <el-table-column label="时间" min-width="20%">
+        <el-table-column label="时间" min-width="18%">
           <template slot-scope="scope">
             <p>开始日期：{{scope.row.startDate | dateFormat}}</p>
             <p>结束日期：{{scope.row.endDate | dateFormat}}</p>
           </template>
         </el-table-column>
-        <el-table-column prop="province" label="省份" min-width="4%"></el-table-column>
+        <el-table-column prop="province" label="省份" min-width="6%"></el-table-column>
         <el-table-column prop="city" label="城市" min-width="4%"></el-table-column>
         <el-table-column prop="location" label="具体位置" min-width="18%"></el-table-column>
         <el-table-column prop="categoryId" label="类别" min-width="5%">

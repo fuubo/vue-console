@@ -73,6 +73,9 @@
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
+        <el-form-item label="首页推荐" prop="recommendFlag">
+          <el-switch v-model="form.recommendFlag"></el-switch>
+        </el-form-item>
 
         <el-form-item label="编辑明细">
           <el-button type="default" @click="editContent('destinationDetail')">
@@ -140,35 +143,35 @@ export default {
     editor() {
       return this.$refs.myQuillEditor.quill;
     },
-    provinces: function() {
+    provinces: function () {
       let districtList = this.$store.state.districts;
       let result = [{ label: "请选择省份", value: null }];
       if (districtList) {
         result = result.concat(
-          districtList.map(function(district) {
+          districtList.map(function (district) {
             return { label: district.name, value: district.id };
           })
         );
       }
       return result;
     },
-    citys: function() {
+    citys: function () {
       let result = [{ label: "请选择城市", value: null }];
       let districtList = this.$store.state.districts;
       if (this.form.province && districtList) {
         let targetProvince = districtList.find(
-          item => item.name == this.form.province
+          (item) => item.name == this.form.province
         );
         if (targetProvince.childrenList) {
           result = result.concat(
-            targetProvince.childrenList.map(function(district) {
+            targetProvince.childrenList.map(function (district) {
               return { label: district.name, value: district.id };
             })
           );
         }
       }
       return result;
-    }
+    },
   },
   created() {
     this.getData();
@@ -180,7 +183,7 @@ export default {
       content: {
         contentTitle: "",
         contentType: null,
-        contentText: ""
+        contentText: "",
       },
       form: {
         id: null,
@@ -193,34 +196,35 @@ export default {
         location: null,
         categoryId: null,
         picture: null,
+        recommendFlag: false,
         contents: {
           destinationDetail: {
             contentTitle: "目的地介绍",
             contentType: null,
-            contentText: ""
+            contentText: "",
           },
           journeyDetail: {
             contentTitle: "行程介绍",
             contentType: null,
-            contentText: ""
+            contentText: "",
           },
           activityReference: {
             contentTitle: "活动参考数据",
             contentType: null,
-            contentText: ""
+            contentText: "",
           },
           necessaryGear: {
             contentTitle: "必备装备",
             contentType: null,
-            contentText: ""
+            contentText: "",
           },
           costDetail: {
             contentTitle: "费用介绍",
             contentType: null,
-            contentText: ""
-          }
+            contentText: "",
+          },
         },
-        agree: false
+        agree: false,
       },
       contentEditVisable: false,
       formRules: {
@@ -228,59 +232,66 @@ export default {
           {
             required: true,
             message: "必填",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
+        ],
+        recommendFlag: [
+          {
+            required: true,
+            message: "必填",
+            trigger: "blur",
+          },
         ],
         clubId: [
           {
             required: true,
             message: "必选",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         startDate: [
           {
             required: true,
             message: "必选",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         province: [
           {
             required: true,
             message: "必选",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         city: [
           {
             required: true,
             message: "必选",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         location: [
           {
             required: true,
             message: "必填",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         categoryId: [
           {
             required: true,
             message: "必选",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         picture: [
           {
             required: true,
             message: "必传",
-            trigger: "blur"
-          }
-        ]
-      }
+            trigger: "blur",
+          },
+        ],
+      },
     };
   },
   methods: {
@@ -299,6 +310,7 @@ export default {
           this.form.location = activityInfo.location;
           this.form.categoryId = String(activityInfo.categoryId);
           this.form.picture = activityInfo.picture;
+          this.form.recommendFlag = activityInfo.recommendFlag;
           if (activityInfo.contents.destinationDetail) {
             this.form.contents.destinationDetail =
               activityInfo.contents.destinationDetail;
@@ -338,14 +350,14 @@ export default {
     async submitForm(formName) {
       this.loading = true;
       try {
-        this.$refs[formName].validate(async valid => {
+        this.$refs[formName].validate(async (valid) => {
           if (valid) {
             if (this.form.agree) {
               await addActivity(this.form);
               this.$message({
                 showClose: true,
                 message: "添加成功",
-                type: "success"
+                type: "success",
               });
               this.$router.push("/activityList");
             } else {
@@ -374,7 +386,8 @@ export default {
         location: null,
         categoryId: null,
         picture: null,
-        agree: false
+        agree: false,
+        recommendFlag: false,
       };
     },
     clearCityInfo() {
@@ -399,7 +412,7 @@ export default {
       this.$message({
         showClose: true,
         message: "上传成功",
-        type: "success"
+        type: "success",
       });
       return result;
     },
@@ -411,8 +424,8 @@ export default {
     saveContent() {
       this.form.contents[this.content.contentType] = this.content;
       this.contentEditVisable = false;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
