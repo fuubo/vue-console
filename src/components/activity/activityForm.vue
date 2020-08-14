@@ -27,18 +27,18 @@
           <el-input v-model="form.location" placeholder="多个城市请用逗号隔开"></el-input>
         </el-form-item>
         <el-form-item label="活动时间" prop="startDate">
-          <el-col :span="5">
+          <el-col :span="6">
             <el-date-picker
-              type="date"
+              type="datetime"
               placeholder="选择开始日期"
               v-model="form.startDate"
               style="width: 100%;"
             ></el-date-picker>
           </el-col>
           <el-col class="line text-center" :span="1">-</el-col>
-          <el-col :span="5">
+          <el-col :span="6">
             <el-date-picker
-              type="date"
+              type="datetime"
               placeholder="选择结束日期"
               v-model="form.endDate"
               style="width: 100%;"
