@@ -62,8 +62,8 @@
         </el-table-column>
         <el-table-column label="时间" min-width="18%">
           <template slot-scope="scope">
-            <p>开始日期：{{scope.row.startDate | dateFormat}}</p>
-            <p>结束日期：{{scope.row.endDate | dateFormat}}</p>
+            <p>开始日期：{{scope.row.startDate | dateAndTime}}</p>
+            <p>结束日期：{{scope.row.endDate | dateAndTime}}</p>
           </template>
         </el-table-column>
         <el-table-column prop="province" label="省份" min-width="6%"></el-table-column>
