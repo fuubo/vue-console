@@ -3,8 +3,8 @@ import request from './request'
 const getPermissionTree = async () => {
   try {
     let result = await request.post('/system/permissionList')
-    if (result.code === 0 && result.data instanceof Array) {
-      return result.data;
+    if (result.code === 200 && result.data instanceof Array) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -20,8 +20,8 @@ const getPermissionTree = async () => {
 const addPermission = async (params) => {
   try {
     let result = await request.post('/system/addPermission', params)
-    if (result.code === 0) {
-      return result.data;
+    if (result.code === 200) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -36,9 +36,9 @@ const addPermission = async (params) => {
 
 const editPermission = async (params) => {
   try {
-    let result = await request.post('/system/editPermission', params);
-    if (result.code === 0) {
-      return result.data;
+    let result = await request.post('/system/editPermission', params)
+    if (result.code === 200) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -53,9 +53,9 @@ const editPermission = async (params) => {
 
 const closePermission = async (id) => {
   try {
-    let result = await request.post(`/system/closePermission/${id}`);
-    if (result.code === 0) {
-      return result.data;
+    let result = await request.post(`/system/closePermission/${id}`)
+    if (result.code === 200) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -70,9 +70,9 @@ const closePermission = async (id) => {
 
 const reopenPermission = async (id) => {
   try {
-    let result = await request.post(`/system/reopenPermission/${id}`);
-    if (result.code === 0) {
-      return result.data;
+    let result = await request.post(`/system/reopenPermission/${id}`)
+    if (result.code === 200) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -87,8 +87,8 @@ const reopenPermission = async (id) => {
 const getUserList = async (params) => {
   try {
     let result = await request.post('/system/getUserList', params)
-    if (result.code === 0 && result.data.list instanceof Array) {
-      return result.data;
+    if (result.code === 200 && result.data.list instanceof Array) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -104,8 +104,8 @@ const getUserList = async (params) => {
 const addUser = async (params) => {
   try {
     let result = await request.post('/system/addUser', params)
-    if (result.code === 0) {
-      return result.data;
+    if (result.code === 200) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -120,8 +120,8 @@ const addUser = async (params) => {
 const getRoleList = async (params) => {
   try {
     let result = await request.post('/system/getRoleList', params)
-    if (result.code === 0 && result.data.list instanceof Array) {
-      return result.data;
+    if (result.code === 200 && result.data.list instanceof Array) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -137,8 +137,8 @@ const getRoleList = async (params) => {
 const addRole = async (params) => {
   try {
     let result = await request.post('/system/addRole', params)
-    if (result.code === 0) {
-      return result.data;
+    if (result.code === 200) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -153,8 +153,8 @@ const addRole = async (params) => {
 const getDepartmentList = async (params) => {
   try {
     let result = await request.post('/system/getDepartmentList', params)
-    if (result.code === 0 && result.data.list instanceof Array) {
-      return result.data;
+    if (result.code === 200 && result.data.list instanceof Array) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -170,8 +170,8 @@ const getDepartmentList = async (params) => {
 const addDepartment = async (params) => {
   try {
     let result = await request.post('/system/addDepartment', params)
-    if (result.code === 0) {
-      return result.data;
+    if (result.code === 200) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -187,8 +187,8 @@ const addDepartment = async (params) => {
 const userAuthorization = async (params) => {
   try {
     let result = await request.post('/system/userAuthorization', params)
-    if (result.code === 0) {
-      return result.data;
+    if (result.code === 200) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -204,8 +204,8 @@ const userAuthorization = async (params) => {
 const roleAuthorization = async (params) => {
   try {
     let result = await request.post('/system/roleAuthorization', params)
-    if (result.code === 0) {
-      return result.data;
+    if (result.code === 200) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -221,8 +221,8 @@ const roleAuthorization = async (params) => {
 const getPermissionsByCondition = async (params) => {
   try {
     let result = await request.post('/system/getPermissionsByCondition', params)
-    if (result.code === 0) {
-      return result.data;
+    if (result.code === 200) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -238,8 +238,8 @@ const getPermissionsByCondition = async (params) => {
 const getAllRole = async (params) => {
   try {
     let result = await request.post('/system/getAllRole', params)
-    if (result.code === 0 && result.data instanceof Array) {
-      return result.data;
+    if (result.code === 200 && result.data instanceof Array) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -255,8 +255,8 @@ const getAllRole = async (params) => {
 const setUserRole = async (params) => {
   try {
     let result = await request.post('/system/setUserRole', params)
-    if (result.code === 0) {
-      return result.data;
+    if (result.code === 200) {
+      return result.data
     } else {
       throw {
         code: 100,
@@ -271,7 +271,7 @@ const setUserRole = async (params) => {
 
 const getSystemDistrictList = async (param) => {
   let result = await request.post('/system/getSystemDistrictList', param)
-  if (result.code === 0) {
+  if (result.code === 200) {
     return result.data
   } else {
     throw {
@@ -283,7 +283,7 @@ const getSystemDistrictList = async (param) => {
 
 const getSystemClubMap = async (param) => {
   let result = await request.post('/system/getSystemClubMap', param)
-  if (result.code === 0) {
+  if (result.code === 200) {
     return result.data
   } else {
     throw {

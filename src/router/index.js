@@ -7,18 +7,19 @@ import layout from '@/pages/layout'
 import home from '@/pages/home'
 import login from '@/pages/login'
 import notFound from '@/pages/404'
-const permissionTree = () => import('@/pages/system/permissionTree');
-const userList = () => import('@/pages/system/userList');
-const roleList = () => import('@/pages/system/roleList');
-const departmentList = () => import('@/pages/system/departmentList');
-const activityList = () => import('@/pages/activity/activityList');
-const addActivity = () => import('@/pages/activity/addActivity');
-const activityInfo = () => import('@/pages/activity/activityInfo');
+const permissionTree = () => import('@/pages/system/permissionTree')
+const userList = () => import('@/pages/system/userList')
+const roleList = () => import('@/pages/system/roleList')
+const departmentList = () => import('@/pages/system/departmentList')
+const activityList = () => import('@/pages/activity/activityList')
+const addActivity = () => import('@/pages/activity/addActivity')
+const activityInfo = () => import('@/pages/activity/activityInfo')
+const fileList = () => import('@/pages/system/fileList')
 
 Vue.use(Router)
 
 const originalPush = Router.prototype.push
-Router.prototype.push = function push(location, onResolve, onReject) {
+Router.prototype.push = function push (location, onResolve, onReject) {
   if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
   try {
     return originalPush.call(this, location).catch(err => err)
@@ -87,6 +88,12 @@ let router = new Router({
           name: '活动详情',
           props: true,
           component: activityInfo
+        },
+        {
+          path: '/fileList',
+          name: '文件管理',
+          props: true,
+          component: fileList
         }
       ]
     }
@@ -94,13 +101,13 @@ let router = new Router({
 })
 
 router.onError((error) => {
-  const pattern = /Loading chunk (\d)+ failed/g;
-  const isChunkLoadFailed = error.message.match(pattern);
-  const targetPath = router.history.pending.fullPath;
+  const pattern = /Loading chunk (\d)+ failed/g
+  const isChunkLoadFailed = error.message.match(pattern)
+  const targetPath = router.history.pending.fullPath
   if (isChunkLoadFailed) {
-    router.replace(targetPath);
+    router.replace(targetPath)
   }
-});
+})
 
 router.beforeEach((to, from, next) => {
   let login = window.localStorage.getItem(LOGINAUTHTOKEN)

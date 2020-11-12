@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {LOGINAUTHTOKEN} from '../utils/constants'
+import { LOGINAUTHTOKEN } from '../utils/constants'
 
 const baseURL = '/console'
 const instance = axios.create({
@@ -21,7 +21,7 @@ instance.interceptors.request.use(
     return config
   },
   err => {
-    console.error('interceptor error print',err.response.status)
+    console.error('interceptor error print', err.response.status)
     return Promise.reject(err)
   }
 )
@@ -30,8 +30,8 @@ instance.interceptors.response.use(
   response => {
     if (response.status >= 200 && response.status < 300) {
       response = response.data
-      if(response.code){
-        if(response.code === 0) {
+      if (response.code) {
+        if (response.code === 200) {
           return response
         } else {
           return Promise.reject(response)
@@ -47,10 +47,10 @@ instance.interceptors.response.use(
 
 export default {
   async get (url, params, responseType) {
-    return instance.get(url, params, {responseType})
+    return instance.get(url, params, { responseType })
   },
   async post (url, params, responseType) {
-    return instance.post(url, params, {responseType})
+    return instance.post(url, params, { responseType })
   },
   async delete (url, params) {
     return instance.delete(url, params)
